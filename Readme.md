@@ -127,3 +127,29 @@ The following shows a JWT that has the previous header and payload encoded, and 
 - Header = algo & type
 - Payload = info (get resources that belong only to that user)
 - Signature = secret to sign token -> have to keep on server
+
+## NPM Package
+
+https://www.npmjs.com/package/jsonwebtoken
+
+## Create JWT Token
+
+```
+  if (!username || !password) {
+    throw new CustomAPIError('Please provide a username and password', 400)
+  }
+
+  // create token
+
+  // normally id is provided by DB, but for demo, we use date
+
+  // payload, jwt secret, expires in option
+  // jwt secret needs to be long & unguessable
+  const id = new Date().getDate()
+
+  // try to keep payload small, better user experience
+  const token = jwt.sign({ foo: 'bar' }, process.env.JWT_SECRET)
+
+  res.status(200).json({ msg: 'user created' }, token)
+}
+```

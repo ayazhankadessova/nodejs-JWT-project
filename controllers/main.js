@@ -2,6 +2,8 @@
 // if exist, create new JWT
 // send back to front end
 
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 const CustomAPIError = require('../errors/custom-error')
 
 // setup authentication so only the request with JWT can access the dashboard
@@ -22,7 +24,21 @@ const login = async (req, res) => {
   if (!username || !password) {
     throw new CustomAPIError('Please provide a username and password', 400)
   }
-  res.send('Fake Login/Register/Sign Up rote')
+
+  // create token
+
+  // normally id is provided by DB, but for demo, we use date
+
+  // payload, jwt secret, expires in option
+  // jwt secret needs to be long & unguessable
+  const id = new Date().getDate()
+
+  // try to keep payload small, better user experience
+  const token = jwt.sign({ id, username }, process.env.JWT_SECRET, {
+    expiresIn: '30d',
+  })
+
+  res.status(200).json({ msg: 'user created', token })
 }
 
 const dashboard = async (req, res) => {

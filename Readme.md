@@ -153,3 +153,53 @@ https://www.npmjs.com/package/jsonwebtoken
   res.status(200).json({ msg: 'user created' }, token)
 }
 ```
+
+## How it works
+
+- JWT Token gets generated and it need to be sent to the frontend, so it can use it as bearer token and get the data later.
+- So, now we need to work on sending the token that we have just generated and which is sitting in the local storage
+- If we browse the network request, we can see that the token should be sent in the header as the Authorization : bearer toke, which we can also see in the `browser-app.js`
+- So, in the dashboard, we are looking for the headers.
+
+## Get Token and Verify it
+
+```
+const authHeader = req.headers.authorization
+
+  // assign Authorization header to the value
+  // If authHeader does not exist or if it does not start with the Bearer, then throw our custom Error
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    throw new CustomAPIError('No Token Provided', 401)
+  }
+
+  const token = authHeader.split(' ')[1]
+
+  console.log(token)
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    console.log(decoded)
+  } catch (error) {
+    throw new CustomAPIError('Not authorized to access this route', 401)
+  }
+```
+
+## Make it Dynamic
+
+```
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
+    const luckyNumber = Math.floor(Math.random() * 100)
+    res.status(200).json({
+      msg: `Hello, ${decoded['username']}`,
+      secret: `Your lucky number is ${luckyNumber}. You can use it to authorize the data`,
+    })
+
+    console.log(decoded)
+  } catch (error) {
+    throw new CustomAPIError('Not authorized to access this route', 401)
+  }
+```
+
+- WIll get specialized greeting

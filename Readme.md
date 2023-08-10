@@ -236,3 +236,23 @@ const authMiddleware = async (req, res, next) => {
 - Since we need to pass authentication middleware to the `/dashboard` route, we need to add it to the router`router.get('/dashboard', authMiddleware, dashboard)`
 
 ## Differentiate Custom Errors based on status codes
+
+- create a file for every custom error you need to make, such as
+  `unauthenticated`.
+- make it inherit from `CustomAPIError`, just change the status code
+- bonus: add `index.js`, which will export all the error
+
+## Http Status codes Package
+
+- https://www.npmjs.com/package/http-status-codes
+- we can replace status codes like this, for better readability:
+
+```
+const { StatusCodes } = require('http-status-codes')
+
+...
+  return res
+    .status(StatusCodes.INTERNAL_SERVER_ERROR)
+    .send('Something went wrong try again later')
+}
+```

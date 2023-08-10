@@ -4,16 +4,13 @@
 
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
-const CustomAPIError = require('../errors/custom-error')
+const { BadRequestError } = require('../errors')
+const { StatusCodes } = require('http-status-codes')
 
 // setup authentication so only the request with JWT can access the dashboard
 
 const login = async (req, res) => {
-  //   console.log(req.body)
-
   const { username, password } = req.body
-  console.log(username)
-  console.log(password)
 
   // mongo in the future
 
@@ -22,7 +19,7 @@ const login = async (req, res) => {
   // check values
 
   if (!username || !password) {
-    throw new CustomAPIError('Please provide a username and password', 400)
+    throw new BadRequestError('Please provide a username and password.')
   }
 
   // create token
@@ -38,19 +35,15 @@ const login = async (req, res) => {
     expiresIn: '30d',
   })
 
-  res.status(200).json({ msg: 'user created', token })
+  res.status(StatusCodes.OK).json({ msg: 'user created', token })
 }
 
 const dashboard = async (req, res) => {
   console.log(user)
-  //   console.log(token)
-
-  //   try {
-  //     const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
   const luckyNumber = Math.floor(Math.random() * 100)
-  res.status(200).json({
-    msg: `Hello, ${req.user['username']}`,
+  res.status(StatusCodes.OK).json({
+    msg: `Hello, ${user['username']}`,
     secret: `Your lucky number is ${luckyNumber}. You can use it to authorize the data`,
   })
 

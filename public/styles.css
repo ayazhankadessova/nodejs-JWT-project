@@ -16,11 +16,10 @@ html {
   --primary-200: #c1beff;
   --primary-300: #a29dff;
   --primary-400: #837dff;
-  --primary-500: #645cff;
-  --primary-600: #504acc;
-  --primary-700: #3c3799;
-  --primary-800: #282566;
-  --primary-900: #141233;
+  --primary-500: #d2af56;
+  --primary-600: #b89b50;
+  --primary-700: #ab8e44;
+  --primary-800: #927838;
 
   /* grey */
   --grey-50: #f8fafc;
@@ -42,9 +41,9 @@ html {
   --green-dark: #0f5132;
 
   /* fonts  */
-  --headingFont: 'Roboto', sans-serif;
-  --bodyFont: 'Nunito', sans-serif;
-  --smallText: 0.7em;
+  --headingFont: 'Inconsolata', monospace;
+  --bodyFont: 'Inconsolata', monospace;
+  --smallText: 0.8em;
   /* rest of the vars */
   --backgroundColor: var(--grey-50);
   --textColor: var(--grey-900);

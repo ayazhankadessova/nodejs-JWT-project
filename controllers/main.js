@@ -7,29 +7,29 @@ require('dotenv').config()
 const { BadRequestError } = require('../errors')
 const { StatusCodes } = require('http-status-codes')
 
-// setup authentication so only the request with JWT can access the dashboard
+// Set Up Authentication so only the request with JWT can access the dashboard
 
 const login = async (req, res) => {
   const { username, password } = req.body
 
-  // mongo in the future
+  // We will use MongoDb here in the future
 
   // joi (authentication)
 
-  // check values
+  // 1. Check if user has given username & password
 
   if (!username || !password) {
     throw new BadRequestError('Please provide a username and password.')
   }
 
-  // create token
+  // 2. If there is username & password, create a token.
 
-  // normally id is provided by DB, but for demo, we use date
+  // 3. Normally id is provided by DB, but for demo, we use date
 
-  // payload, jwt secret, expires in option
-  // jwt secret needs to be long & unguessable
   const id = new Date().getDate()
 
+  // 4. Add payload, jwt secret, expires in option to create a Token
+  // * jwt secret needs to be long & unguessable
   // try to keep payload small, better user experience
   const token = jwt.sign({ id, username }, process.env.JWT_SECRET, {
     expiresIn: '30d',
@@ -38,19 +38,17 @@ const login = async (req, res) => {
   res.status(StatusCodes.OK).json({ msg: 'user created', token })
 }
 
+// 1. Give Access to Data if Token is present and valid
+// * Use error handler middleware
 const dashboard = async (req, res) => {
-  console.log(user)
+  //   console.log(user)
 
+  // Generate a lucky number
   const luckyNumber = Math.floor(Math.random() * 100)
   res.status(StatusCodes.OK).json({
     msg: `Hello, ${user['username']}`,
     secret: `Your lucky number is ${luckyNumber}. You can use it to authorize the data`,
   })
-
-  //     // console.log(decoded)
-  //   } catch (error) {
-  //     throw new CustomAPIError('Not authorized to access this route', 401)
-  //   }
 }
 
 module.exports = { login, dashboard }

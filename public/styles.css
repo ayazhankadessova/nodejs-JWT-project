@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 /* fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200&display=swap');
 
 html {
   font-size: 100%;

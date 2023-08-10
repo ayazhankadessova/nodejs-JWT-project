@@ -203,3 +203,36 @@ const authHeader = req.headers.authorization
 ```
 
 - WIll get specialized greeting
+
+## Since authentication will be used in multiple routes,
+
+- we will set it up as middleware and choose routes that will use it.
+
+```
+const authMiddleware = async (req, res, next) => {
+  const authHeader = req.headers.authorization
+  console.log(authHeader)
+
+  // assign Authorization header to the value
+  // If authHeader does not exist or if it does not start with the Bearer, then throw our custom Error
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    throw new CustomAPIError('No Token Provided', 401)
+  }
+
+  const token = authHeader.split(' ')[1]
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    console.log(decoded)
+    const { id, username } = decoded
+    user = { id, username }
+    next()
+  } catch (error) {
+    throw new CustomAPIError('Not authorized to access this route', 401)
+  }
+}
+```
+
+- Since we need to pass authentication middleware to the `/dashboard` route, we need to add it to the router`router.get('/dashboard', authMiddleware, dashboard)`
+
+## Differentiate Custom Errors based on status codes

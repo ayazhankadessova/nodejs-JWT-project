@@ -76,21 +76,21 @@ This Api returns JWT Token After successful Login.
 }
 ```
 
-### Dashboard API
+### 2. Dashboard API
 
 <br>
 
 This Api generates a random number for a user if the Token is valid & present
 
-#### Api Endpoint
+#### API Endpoint
 
-`http://api_domain:3000/api/v1/dashboard`
+`GET` `http://api_domain:3000/api/v1/dashboard`
 
 #### Headers
 
 In order to use this endpoint, you need to pass `token` that we have created in the `Login` as the Authorization field in the header
 
-`Authorization: "Bearer Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwidXNlcm5hbWUiOiJZZXJrZXpoYW4iLCJpYXQiOjE2OTE1NjUyNjgsImV4cCI6MTY5NDE1NzI2OH0.vQl4GUbPmzbv15F_DkkxwWjd5urPJ7VfcXXJ_UB5hGc"`
+`Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwidXNlcm5hbWUiOiJZZXJrZXpoYW4iLCJpYXQiOjE2OTE1NjUyNjgsImV4cCI6MTY5NDE1NzI2OH0.vQl4GUbPmzbv15F_DkkxwWjd5urPJ7VfcXXJ_UB5hGc"`
 
 #### Output
 

@@ -1,4 +1,4 @@
-# nodejs-jwt-token-authentication-project
+# nodejs-JWT-token-authentication
 
 ## 💡 Overview
 

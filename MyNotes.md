@@ -198,9 +198,9 @@ const authHeader = req.headers.authorization
 
 - WIll get specialized greeting & lucky number
 
-## Since authentication will be used in multiple routes,
+## Since authentication will be used in multiple routes
 
-- we will set it up as middleware and choose routes that will use it.
+- We will set it up as middleware and choose routes that will use it.
 
 ```
 const authMiddleware = async (req, res, next) => {

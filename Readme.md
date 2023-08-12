@@ -44,23 +44,19 @@ npm install
 npm start
 ```
 
-## Api
+## APIs
 
-[User Login](#User-Login-API)<br>
-[Fetch User using Jwt Token](#Fetch-User-using-Jwt-Token)<br>
-[Dashboard](#Dasboard)
+> You can run API in Postman.
 
-> You can run API in Postman
-
-### User Login API
+### 1. User Login API
 
 <br>
 
-This Api return JWT Token After successful Login
+This Api returns JWT Token After successful Login.
 
-#### Api Endpoint
+#### API Endpoint
 
-`http://localhost:3000/api/v1/login`
+`POST` `http://localhost:3000/api/v1/login`
 
 #### Sample Request Body
 
